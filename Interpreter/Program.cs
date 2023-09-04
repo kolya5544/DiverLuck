@@ -6,109 +6,22 @@ namespace DiverLuckInterpreter
     {
         static void Main(string[] args)
         {
-            /*Test1();
-            Test2();
-            Test3();
-            Test4();
-            Test5(); they don't work anymore...
-            Test6();*/
-            //HelloWorldTest();
-
-            WebServerApp();
-        }
-
-        /// <summary>
-        /// A program that outputs 15 newlines.
-        /// </summary>
-        public static void Test1()
-        {
-            string program = "&(((+++++++++++)+++++++++++++++++++++++++++++++++++++++++)>+).....>(((\\"; // define the function
-            program += "))).))).)))."; // call the function three times
-
             var dl = new DiverLuck();
-            dl.ExecuteProgram(program);
-        }
+            dl.debug.debugEnabled = true;
 
-        /// <summary>
-        /// A program that creates a primitive integer with a value of 10
-        /// </summary>
-        public static void Test2()
-        {
-            string program = "+++++0=@"; // create primitive integer and set its value to 10
+            while (true)
+            {
+                Console.Write(":");
+                string cmd = Console.ReadLine();
 
-            var dl = new DiverLuck();
-            dl.ExecuteProgram(program);
-        }
+                if (cmd == "webserver")
+                {
+                    WebServerApp();
+                    continue;
+                }
 
-        /// <summary>
-        /// A program that creates a primitive integer array
-        /// </summary>
-        public static void Test3()
-        {
-            string program = "+++++0=@1";
-
-            var dl = new DiverLuck();
-            dl.ExecuteProgram(program);
-        }
-
-        /// <summary>
-        /// A program that has several infinite loops
-        /// </summary>
-        public static void Test4()
-        {
-            string program = "[[[[+b]b]b]b]";
-
-            var dl = new DiverLuck();
-            dl.ExecuteProgram(program);
-        }
-
-        /// <summary>
-        /// A program that creates an instance of StringBuilder
-        /// </summary>
-        public static void Test5()
-        {
-            string program = "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++)>++++++++++++++++++++++++++)5";
-
-            var dl = new DiverLuck();
-            dl.ExecuteProgram(program);
-        }
-
-        /// <summary>
-        /// A program that will run until the value of memory cell is equal to 100
-        /// </summary>
-        public static void Test6()
-        {
-            string program = "[+ie100f{b}]";
-
-            var dl = new DiverLuck();
-            dl.ExecuteProgram(program);
-        }
-
-        public static void HelloWorldTest()
-        {
-            string program = "[+ie97f{b}])>[+ie28f{b}])<5[+ie255f{b}]"; // create a new StringBuilder
-            program += "&>[+ie11f{b}]0[+ie32f{b}]=\\"; // create a function that creates a new CHAR and sets it to SPACEBAR
-            program += "&((((((((^[<ie255f{b}]>[-ie0f{b}][+ie25f{b}])))))<.>>((((((((\\"; // create a function that first pushes CHAR into stack, then goes to StringBuilder,
-                                                                               // selects Append(char), and puts current CHAR into StringBuilder
-            program += ">>((((((((";
-            program += "))).[-ie0f{b}][+ie72f{b}]=[-ie0f{b}](+)."; // create "H" (72) and push to SB
-            program += "))).[-ie0f{b}][+ie101f{b}]=[-ie0f{b}](+)."; // create "e"
-            program += "))).[-ie0f{b}][+ie108f{b}]=[-ie0f{b}](+)."; // create "l"
-            program += "))).[-ie0f{b}][+ie108f{b}]=[-ie0f{b}](+)."; // create "l"
-            program += "))).[-ie0f{b}][+ie111f{b}]=[-ie0f{b}](+)."; // create "o"
-            program += "))).[-ie0f{b}][+ie44f{b}]=[-ie0f{b}](+)."; // create ","
-            program += "))).[-ie0f{b}][+ie32f{b}]=[-ie0f{b}](+)."; // create " "
-            program += "))).[-ie0f{b}][+ie119f{b}]=[-ie0f{b}](+)."; // create "w"
-            program += "))).[-ie0f{b}][+ie111f{b}]=[-ie0f{b}](+)."; // create "o"
-            program += "))).[-ie0f{b}][+ie114f{b}]=[-ie0f{b}](+)."; // create "r"
-            program += "))).[-ie0f{b}][+ie108f{b}]=[-ie0f{b}](+)."; // create "l"
-            program += "))).[-ie0f{b}][+ie100f{b}]=[-ie0f{b}](+)."; // create "d"
-            program += "))).[-ie0f{b}][+ie33f{b}]=[-ie0f{b}](+)."; // create "!"
-            program += ">[+ie4f{b}])))))[<ie255f{b}]."; // call .ToString()
-            program += "(((((((([-ie0f{b}][+ie11f{b}])[+ie52f{b}])[+ie82f{b}])."; // call System.Console.WriteLine(System.String)
-
-            var dl = new DiverLuck();
-            dl.ExecuteProgram(program);
+                dl.ExecuteProgram(cmd);
+            }
         }
 
         public static void WebServerApp()

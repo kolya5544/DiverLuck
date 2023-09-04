@@ -214,13 +214,30 @@ namespace DiverLuckCore
         public static void ObjectAdd(this DiverLuck diver)
         {
             var cont = diver.GetCell();
-            cont.obj = (int)cont.obj + cont.value;
+            var type = cont.obj.GetType();
+            if (DiverLuck.primitiveTypes.Contains(type))
+            {
+                cont.obj = Convert.ChangeType(cont.value + (int)Convert.ChangeType(cont.obj, typeof(int)), type);
+            }
+            else
+            {
+                cont.obj = (int)Convert.ChangeType(cont.obj, typeof(int)) + cont.value;
+            }
         }
+
 
         public static void ObjectRemove(this DiverLuck diver)
         {
             var cont = diver.GetCell();
-            cont.obj = (int)cont.obj - cont.value;
+            var type = cont.obj.GetType();
+            if (DiverLuck.primitiveTypes.Contains(type))
+            {
+                cont.obj = Convert.ChangeType(cont.value - (int)Convert.ChangeType(cont.obj, typeof(int)), type);
+            }
+            else
+            {
+                cont.obj = (int)Convert.ChangeType(cont.obj, typeof(int)) - cont.value;
+            }
         }
 
         public static void ExecCmd(this DiverLuck diver)
